@@ -1,6 +1,3 @@
-Here is the **final README.md in pure Markdown format**, ready to paste directly into your GitHub project.
-
----
 
 # **TimeFlow – AI-Powered Daily Time Tracking & Analytics Dashboard**
 
@@ -114,8 +111,10 @@ Used for:
 │── index.html           # Login/Signup page
 │── tracker.html         # Main dashboard
 │── css/
+      ├──auth.css
 │     └── style.css
 │── js/
+      ├──analytics.js
 │     ├── firebase-config.js
 │     ├── auth.js
 │     └── tracker.js
