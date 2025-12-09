@@ -11,9 +11,7 @@ The project is built with **HTML, CSS, JavaScript, Firebase**, and multiple **AI
 
 ## 🚀 **Live Demo**
 
-🔗 *Add your deployed GitHub Pages link here*
-Example:
-[https://your-username.github.io/your-repo-name](https://your-username.github.io/your-repo-name)
+🔗 https://pothulanagajyothi.github.io/Time-Tracker-Application/
 
 ---
 
@@ -166,17 +164,22 @@ in your browser.
 
 ---
 
-## 🖼️ **Screenshots (Optional but Recommended)**
+## 🖼️ **Screenshots **
 
-Add images in `/assets` and reference them like this:
 
-### **Login**
+![alt text](assets/Screenshot%202025-12-09%20231417.png)
 
-![Login Page](./assets/login.png)
 
-### **Dashboard**
+![alt text](assets/Screenshot%202025-12-09%20231610.png)
 
-![Dashboard](./assets/dashboard.png)
+
+![alt text](assets/Screenshot%202025-12-09%20231658.png)
+
+
+![alt text](assets/Screenshot%202025-12-09%20231739.png)
+
+
+![alt text](assets/Screenshot%202025-12-09%20231754.png)
 
 ---
 
@@ -195,24 +198,10 @@ Add images in `/assets` and reference them like this:
 
 | Purpose           | Link                                                                                               |
 | ----------------- | -------------------------------------------------------------------------------------------------- |
-| GitHub Repository | [https://github.com/your-username/your-repo-name](https://github.com/your-username/your-repo-name) |
-| Live Demo         | [https://your-username.github.io/your-repo-name](https://your-username.github.io/your-repo-name)   |
+| GitHub Repository | https://github.com/PothulaNagaJyothi/Time-Tracker-Application |
+| Live Demo         | https://pothulanagajyothi.github.io/Time-Tracker-Application/   |
 
 
 ---
 
-## Application Screenshots
 
-![alt text](assets/Screenshot%202025-12-09%20231417.png)
-
-
-![alt text](assets/Screenshot%202025-12-09%20231610.png)
-
-
-![alt text](assets/Screenshot%202025-12-09%20231658.png)
-
-
-![alt text](assets/Screenshot%202025-12-09%20231739.png)
-
-
-![alt text](assets/Screenshot%202025-12-09%20231754.png)
