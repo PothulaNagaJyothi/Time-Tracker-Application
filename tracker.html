@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TimeFlow - Daily Time Tracker</title>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-background">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <!-- Left: Logo -->
+      <div class="navbar-left">
+        <div class="navbar-logo">
+          <span class="navbar-logo-icon">⏱</span>
+        </div>
+        <span class="navbar-title">TimeFlow</span>
+      </div>
+
+      <!-- Right: User info + logout -->
+      <div class="navbar-right">
+        <span id="navbarUserEmail" class="navbar-user-email">user@example.com</span>
+
+        <button id="logoutBtn" class="navbar-logout-btn">
+          <span class="logout-icon">⎋</span>
+          <span class="logout-text">Logout</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <main class="page-main">
+    <div class="container">
+      <div class="layout">
+
+        <!-- LEFT COLUMN: Date + Form + List -->
+        <aside class="left-column">
+
+          <!-- DATE PICKER CARD -->
+          <div class="date-picker-card">
+            <div class="date-picker-top">
+              <!-- Previous -->
+              <button class="date-nav-btn" id="prevDateBtn" title="Previous Day">←</button>
+
+              <!-- Date display + calendar popup -->
+              <div class="date-popup-wrapper">
+                <button class="date-display-btn" id="datePopupBtn">
+                  <span class="date-icon">📅</span>
+                  <span id="selectedDateText">Monday, Jan 1</span>
+                </button>
+
+                <!-- Calendar popup -->
+                <div class="date-popup" id="calendarPopup">
+                  <div id="calendarContainer" class="calendar-container">
+                    <!-- JS will render the calendar grid here -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Next -->
+              <button class="date-nav-btn" id="nextDateBtn" title="Next Day">→</button>
+            </div>
+
+            <!-- Today Button -->
+            <button class="today-btn" id="todayBtn">Today</button>
+          </div>
+
+          <!-- ACTIVITY FORM CARD -->
+          <form id="activityForm" class="activity-form">
+            <h3 class="activity-form__title">Add Activity</h3>
+
+            <!-- Title -->
+            <div class="field">
+              <label for="activityTitle" class="field__label">Activity Title</label>
+              <input
+                id="activityTitle"
+                type="text"
+                class="field__input"
+                placeholder="What did you work on?"
+              />
+            </div>
+
+            <!-- Category -->
+            <div class="field">
+              <label for="activityCategory" class="field__label">Category</label>
+              <select id="activityCategory" class="field__select">
+                <option value="" disabled selected>Select category</option>
+                <option value="work">Work</option>
+                <option value="meeting">Meeting</option>
+                <option value="break">Break</option>
+                <option value="learning">Learning</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <!-- Minutes -->
+            <div class="field">
+              <label for="activityMinutes" class="field__label">Duration (minutes)</label>
+              <input
+                id="activityMinutes"
+                type="number"
+                min="1"
+                class="field__input"
+                placeholder="30"
+              />
+            </div>
+
+            <!-- Submit -->
+            <button
+              type="submit"
+              id="addActivityBtn"
+              class="btn btn--primary btn--full"
+            >
+              <span class="btn__icon">+</span>
+              <span>Add Activity</span>
+            </button>
+          </form>
+
+          <!-- ACTIVITY LIST CARD -->
+          <div class="activity-list-card">
+            <h3 class="activity-list-card__title">Today's Activities</h3>
+
+            <!-- Empty state -->
+            <div id="noActivities" class="activity-list-empty">
+              <div class="activity-list-empty__icon">⏱</div>
+              <p class="activity-list-empty__text">No activities yet</p>
+              <p class="activity-list-empty__sub">Add your first activity above</p>
+            </div>
+
+            <!-- Scrollable list -->
+            <div id="activityList" class="activity-list">
+              <!-- JS will inject .activity-item rows here -->
+            </div>
+          </div>
+
+        </aside>
+
+        <!-- RIGHT COLUMN: Summary + Charts -->
+        <section class="right-column">
+
+          <!-- SUMMARY CARDS -->
+          <div class="summary-grid">
+
+            <!-- TOTAL TIME -->
+            <div class="summary-card fade-in" style="animation-delay: 0ms;">
+              <div class="summary-card-top">
+                <div class="summary-card-text">
+                  <p class="summary-card-label">Total Time</p>
+                  <p class="summary-card-value" id="totalMinutesValue">0m</p>
+                </div>
+                <div class="summary-card-icon summary-icon-primary">⏱</div>
+              </div>
+            </div>
+
+            <!-- ACTIVITIES COUNT -->
+            <div class="summary-card fade-in" style="animation-delay: 100ms;">
+              <div class="summary-card-top">
+                <div class="summary-card-text">
+                  <p class="summary-card-label">Activities</p>
+                  <p class="summary-card-value" id="activityCountValue">0</p>
+                </div>
+                <div class="summary-card-icon summary-icon-info">📅</div>
+              </div>
+            </div>
+
+            <!-- AVERAGE PER ACTIVITY -->
+            <div class="summary-card fade-in" style="animation-delay: 200ms;">
+              <div class="summary-card-top">
+                <div class="summary-card-text">
+                  <p class="summary-card-label">Avg per Activity</p>
+                  <p class="summary-card-value" id="avgPerActivityValue">0m</p>
+                </div>
+                <div class="summary-card-icon summary-icon-success">📈</div>
+              </div>
+            </div>
+
+            <!-- DAILY GOAL -->
+            <div class="summary-card fade-in" style="animation-delay: 300ms;">
+              <div class="summary-card-top">
+                <div class="summary-card-text">
+                  <p class="summary-card-label">Daily Goal</p>
+                  <p class="summary-card-value" id="dailyGoalValue">0%</p>
+                </div>
+                <div class="summary-card-icon summary-icon-warning">🎯</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CHARTS -->
+          <div class="charts-grid">
+            <!-- TIME BY CATEGORY -->
+            <div class="chart-card fade-in" id="categoryChartCard">
+              <div class="chart-card__header">
+                <span class="chart-card__icon">📊</span>
+                <h3 class="chart-card__title">Time by Category</h3>
+              </div>
+
+              <!-- Empty state -->
+              <div id="categoryEmpty" class="chart-empty">
+                <p>Add activities to see breakdown</p>
+              </div>
+
+              <!-- Category breakdown -->
+              <div id="categoryBreakdown" class="category-breakdown">
+                <!-- JS will inject category rows here -->
+              </div>
+            </div>
+
+            <!-- WEEKLY TREND -->
+            <div class="chart-card fade-in" id="weeklyTrendCard" style="animation-delay: 100ms;">
+              <div class="chart-card__header">
+                <span class="chart-card__icon">📈</span>
+                <h3 class="chart-card__title">Weekly Trend</h3>
+              </div>
+
+              <div class="weekly-trend">
+                <div class="weekly-bar">
+                  <div class="weekly-bar__fill"></div>
+                  <span>Mon</span>
+                </div>
+                <div class="weekly-bar">
+                  <div class="weekly-bar__fill"></div>
+                  <span>Tue</span>
+                </div>
+                <div class="weekly-bar">
+                  <div class="weekly-bar__fill"></div>
+                  <span>Wed</span>
+                </div>
+                <div class="weekly-bar">
+                  <div class="weekly-bar__fill"></div>
+                  <span>Thu</span>
+                </div>
+                <div class="weekly-bar">
+                  <div class="weekly-bar__fill"></div>
+                  <span>Fri</span>
+                </div>
+                <div class="weekly-bar">
+                  <div class="weekly-bar__fill"></div>
+                  <span>Sat</span>
+                </div>
+                <div class="weekly-bar">
+                  <div class="weekly-bar__fill"></div>
+                  <span>Sun</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FIREBASE SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js"></script>
+
+  <!-- YOUR APP SCRIPTS -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/tracker.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
