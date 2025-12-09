@@ -1,0 +1,720 @@
+/* ----------------------------------------------------------
+   FONT IMPORT
+---------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;400;500;600;700;900&display=swap");
+
+/* ----------------------------------------------------------
+   ROOT THEME VARIABLES
+---------------------------------------------------------- */
+:root {
+  --background: hsl(222 47% 6%);
+  --foreground: hsl(210 40% 98%);
+
+  --card: hsl(222 47% 8%);
+  --card-foreground: hsl(210 40% 98%);
+
+  --popover: hsl(222 47% 10%);
+  --popover-foreground: hsl(210 40% 98%);
+
+  --primary: hsl(174 72% 56%);
+  --primary-foreground: hsl(222 47% 6%);
+
+  --secondary: hsl(222 30% 14%);
+  --secondary-foreground: hsl(210 40% 98%);
+
+  --muted: hsl(222 30% 18%);
+  --muted-foreground: hsl(215 20% 55%);
+
+  --accent: hsl(174 72% 56%);
+  --accent-foreground: hsl(222 47% 6%);
+
+  --destructive: hsl(0 72% 51%);
+  --destructive-foreground: hsl(210 40% 98%);
+
+  --border: hsl(222 30% 18%);
+  --input: hsl(222 30% 14%);
+  --ring: hsl(174 72% 56%);
+
+  --radius: 12px;
+
+  --success: hsl(142 72% 45%);
+  --warning: hsl(38 92% 50%);
+  --info: hsl(199 89% 48%);
+
+  --sidebar-background: hsl(222 47% 6%);
+  --sidebar-foreground: hsl(210 40% 98%);
+  --sidebar-primary: hsl(174 72% 56%);
+  --sidebar-primary-foreground: hsl(222 47% 6%);
+  --sidebar-accent: hsl(222 30% 14%);
+  --sidebar-accent-foreground: hsl(210 40% 98%);
+  --sidebar-border: hsl(222 30% 18%);
+  --sidebar-ring: hsl(174 72% 56%);
+}
+
+/* ----------------------------------------------------------
+   GLOBAL RESET + BASE STYLES
+---------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "DM Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ----------------------------------------------------------
+   UTILITY SYSTEM (Tailwind-like)
+---------------------------------------------------------- */
+
+.flex { display: flex; }
+.grid { display: grid; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+
+.w-full { width: 100%; }
+.rounded-lg { border-radius: var(--radius); }
+.rounded-md { border-radius: calc(var(--radius) - 2px); }
+.rounded-sm { border-radius: calc(var(--radius) - 4px); }
+
+.text-center { text-align: center; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+
+.bg-card { background: var(--card); }
+.border { border: 1px solid var(--border); }
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.45s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ----------------------------------------------------------
+   GLOBAL LAYOUT STYLES
+---------------------------------------------------------- */
+.page-main {
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .page-main { padding: 24px; }
+}
+@media (min-width: 1024px) {
+  .page-main { padding: 32px; }
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .layout { flex-direction: row; }
+}
+
+.left-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .left-column { width: 320px; }
+}
+@media (min-width: 1280px) {
+  .left-column { width: 380px; }
+}
+
+.right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ----------------------------------------------------------
+   NAVBAR
+---------------------------------------------------------- */
+.navbar {
+  height: 64px;
+  background: rgba(15, 23, 42, 0.5);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+.navbar-inner {
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .navbar-inner { padding: 0 24px; }
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), hsl(174 72% 40%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+}
+
+.navbar-logo-icon {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.navbar-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary), hsl(199 89% 60%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 640px) {
+  .navbar-title { display: none; }
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-user-email {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+}
+
+@media (max-width: 768px) {
+  .navbar-user-email { display: none; }
+}
+
+.navbar-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: var(--muted-foreground);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.navbar-logout-btn:hover {
+  color: var(--foreground);
+  background: rgba(148, 163, 184, 0.15);
+}
+
+/* ----------------------------------------------------------
+   DATE PICKER
+---------------------------------------------------------- */
+.date-picker-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.5);
+}
+
+.date-picker-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.date-nav-btn:hover {
+  color: var(--foreground);
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.date-popup-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.date-display-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.date-display-btn:hover {
+  background: rgba(148, 163, 184, 0.15);
+}
+
+.date-icon { color: var(--primary); }
+
+.date-popup {
+  position: absolute;
+  top: 46px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 8px;
+  width: 260px;
+  display: none;
+  border-radius: 12px;
+  z-index: 100;
+}
+
+/* Calendar grid */
+.calendar-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  color: var(--foreground);
+}
+
+.calendar-container .day-name {
+  color: var(--muted-foreground);
+  font-weight: 600;
+}
+
+.calendar-container .day {
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.calendar-container .day:hover {
+  background: rgba(148, 163, 184, 0.15);
+}
+
+.calendar-container .day.selected {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.calendar-container .day.today {
+  background: rgba(99, 102, 241, 0.35);
+  border: 1px solid var(--primary);
+}
+
+/* Today button */
+.today-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.today-btn:hover {
+  background: rgba(148, 163, 184, 0.15);
+}
+
+/* ----------------------------------------------------------
+   ACTIVITY FORM
+---------------------------------------------------------- */
+.activity-form {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.activity-form__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.field {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.field__label {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  margin-bottom: 4px;
+}
+
+.field__input,
+.field__select {
+  background: var(--input);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--primary), hsl(174 72% 40%));
+  color: var(--primary-foreground);
+}
+
+.btn--full { width: 100%; }
+
+/* ----------------------------------------------------------
+   ACTIVITY LIST
+---------------------------------------------------------- */
+.activity-list-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+}
+
+.activity-list-card__title {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.activity-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.activity-list-empty {
+  text-align: center;
+  color: var(--muted-foreground);
+  margin-top: 30px;
+}
+
+.activity-item {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ----------------------------------------------------------
+   SUMMARY CARDS
+---------------------------------------------------------- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .summary-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.summary-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.5);
+}
+
+.summary-card-label {
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+}
+
+.summary-card-value {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.summary-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-icon-primary {
+  background: rgba(99,102,241,0.15);
+  color: #6366f1;
+}
+.summary-icon-info {
+  background: rgba(14,165,233,0.15);
+  color: #0ea5e9;
+}
+.summary-icon-success {
+  background: rgba(34,197,94,0.15);
+  color: #22c55e;
+}
+.summary-icon-warning {
+  background: rgba(234,179,8,0.15);
+  color: #eab308;
+}
+
+/* ----------------------------------------------------------
+   CHARTS
+---------------------------------------------------------- */
+.charts-grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.chart-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.5);
+}
+
+.chart-empty {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+}
+
+.category-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.category-row__bar {
+  height: 10px;
+  background: var(--secondary);
+  border-radius: 8px;
+}
+
+.category-row__fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+.cat-work      { background: var(--info); }
+.cat-meeting   { background: var(--warning); }
+.cat-break     { background: var(--success); }
+.cat-learning  { background: var(--primary); }
+.cat-other     { background: var(--muted-foreground); }
+
+/* Weekly trend */
+.weekly-trend {
+  display: flex;
+  align-items: end;
+  height: 180px;
+  gap: 8px;
+  padding: 4px;
+}
+
+.weekly-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.weekly-bar__fill {
+  width: 100%;
+  background: #475569;
+  border-radius: 8px;
+  height: 20%;
+  transition: height 0.3s ease;
+}
+
+.weekly-bar--today .weekly-bar__fill {
+  background: linear-gradient(135deg, var(--primary), var(--success));
+  box-shadow: 0 0 6px rgba(99,102,241,0.5);
+}
+
+.weekly-bar--today span {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ==========================================================
+   AI-POLISHED STYLING UPGRADES
+   (Hover effects, shadows, animations, responsive tweaks)
+========================================================== */
+
+/* ----------------------------------
+   1. Button Hover + Active States
+---------------------------------- */
+.btn--primary {
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.btn--primary:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ----------------------------------
+   2. Card Shadow + Hover Elevation
+---------------------------------- */
+.card,
+.activity-form,
+.activity-list-card,
+.chart-card,
+.date-picker-card,
+.summary-card {
+  transition: background 0.2s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.card:hover,
+.activity-form:hover,
+.activity-list-card:hover,
+.chart-card:hover,
+.summary-card:hover,
+.date-picker-card:hover {
+  background: hsl(222 47% 12%);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+/* ----------------------------------
+   3. Fade-in for All UI Components
+---------------------------------- */
+.fade-in {
+  opacity: 0;
+  animation: fadeUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----------------------------------
+   4. Activity List Item Interaction
+---------------------------------- */
+.activity-item {
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.activity-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-1px);
+}
+
+/* ----------------------------------
+   5. Inputs: Glow on Focus
+---------------------------------- */
+.field__input:focus,
+.field__select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(94, 234, 212, 0.25);
+  background: hsl(222 30% 10%);
+  transition: 0.15s ease;
+}
+
+/* ----------------------------------
+   6. Responsive Layout (AI Suggestion)
+---------------------------------- */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .left-column {
+    width: 100% !important;
+  }
+
+  .right-column {
+    width: 100%;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
